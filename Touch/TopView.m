@@ -19,13 +19,15 @@
             CGPoint convertPoint = [subview convertPoint:point fromView:self];
             UIView *hitTestView = [subview hitTest:convertPoint withEvent:event];
             if (hitTestView) {
+                NSLog(@"I did it========%@", [hitTestView class]);
                 return hitTestView;
             }
         }
-        
+        NSLog(@"I did it========%@", [self class]);
         return self;
     }
 
+    NSLog(@"nobody did it========");
     return nil;
 }
 

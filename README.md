@@ -154,3 +154,152 @@ iOS Event Handling学习笔记，从实例中学习,
 ```
 
 将TopView中的hitTest方法改写成上边这样以后，再次点击各个View，打印出来的日志和原来一样，验证了前边所说的事件传递过程。
+
+## 扩展
+
+知道了事件传递的过程我们就可以自己来处理事件来完成一些功能，比如说可以让某个View来处理不在该View上的点击事件。
+
+### 增加View响应范围
+
+做之前先把TopView中的代码加几句打印的log，可以打印出处理当前事件的View的类，我们就知道最终是谁处理了这个事件
+
+```ObjectiveC
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    NSLog(@"TopView hitTest");
+    NSLog(@"point:%@", [NSValue valueWithCGPoint:point]);
+    
+    if ([self pointInside:point withEvent:event]) {
+        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
+            CGPoint convertPoint = [subview convertPoint:point fromView:self];
+            UIView *hitTestView = [subview hitTest:convertPoint withEvent:event];
+            if (hitTestView) {
+                NSLog(@"I did it========%@", [hitTestView class]);
+                return hitTestView;
+            }
+        }
+        NSLog(@"I did it========%@", [self class]);
+        return self;
+    }
+
+    NSLog(@"nobody did it========");
+    return nil;
+}
+```
+
+现在点击SubView1和SubView2之间的蓝色部分
+
+```shell
+2016-08-31 14:30:45.841 Touch[2910:1084462] TopView hitTest
+2016-08-31 14:30:45.842 Touch[2910:1084462] point:NSPoint: {85, 188.5}
+2016-08-31 14:30:45.842 Touch[2910:1084462] TopView pointInside
+2016-08-31 14:30:45.843 Touch[2910:1084462] point:NSPoint: {85, 188.5}
+2016-08-31 14:30:45.843 Touch[2910:1084462] SubView4 hitTest
+2016-08-31 14:30:45.843 Touch[2910:1084462] point:NSPoint: {77, -189.5}
+2016-08-31 14:30:45.843 Touch[2910:1084462] SubView4 pointInside
+2016-08-31 14:30:45.843 Touch[2910:1084462] point:NSPoint: {77, -189.5}
+2016-08-31 14:30:45.844 Touch[2910:1084462] SubView3 hitTest
+2016-08-31 14:30:45.845 Touch[2910:1084462] point:NSPoint: {-70, 91.5}
+2016-08-31 14:30:45.845 Touch[2910:1084462] SubView3 pointInside
+2016-08-31 14:30:45.845 Touch[2910:1084462] point:NSPoint: {-70, 91.5}
+2016-08-31 14:30:45.845 Touch[2910:1084462] SubView2 hitTest
+2016-08-31 14:30:45.845 Touch[2910:1084462] point:NSPoint: {77, -32.5}
+2016-08-31 14:30:45.845 Touch[2910:1084462] SubView2 pointInside
+2016-08-31 14:30:45.846 Touch[2910:1084462] point:NSPoint: {77, -32.5}
+2016-08-31 14:30:45.846 Touch[2910:1084462] SubView1 hitTest
+2016-08-31 14:30:45.846 Touch[2910:1084462] point:NSPoint: {77, 171.5}
+2016-08-31 14:30:45.846 Touch[2910:1084462] SubView1 pointInside
+2016-08-31 14:30:45.846 Touch[2910:1084462] point:NSPoint: {77, 171.5}
+2016-08-31 14:30:45.846 Touch[2910:1084462] I did it========TopView
+2016-08-31 14:30:45.847 Touch[2910:1084462] TopView hitTest
+2016-08-31 14:30:45.847 Touch[2910:1084462] point:NSPoint: {85, 188.5}
+2016-08-31 14:30:45.847 Touch[2910:1084462] TopView pointInside
+2016-08-31 14:30:45.847 Touch[2910:1084462] point:NSPoint: {85, 188.5}
+2016-08-31 14:30:45.851 Touch[2910:1084462] SubView4 hitTest
+2016-08-31 14:30:45.851 Touch[2910:1084462] point:NSPoint: {77, -189.5}
+2016-08-31 14:30:45.851 Touch[2910:1084462] SubView4 pointInside
+2016-08-31 14:30:45.851 Touch[2910:1084462] point:NSPoint: {77, -189.5}
+2016-08-31 14:30:45.852 Touch[2910:1084462] SubView3 hitTest
+2016-08-31 14:30:45.852 Touch[2910:1084462] point:NSPoint: {-70, 91.5}
+2016-08-31 14:30:45.852 Touch[2910:1084462] SubView3 pointInside
+2016-08-31 14:30:45.852 Touch[2910:1084462] point:NSPoint: {-70, 91.5}
+2016-08-31 14:30:45.852 Touch[2910:1084462] SubView2 hitTest
+2016-08-31 14:30:45.852 Touch[2910:1084462] point:NSPoint: {77, -32.5}
+2016-08-31 14:30:45.852 Touch[2910:1084462] SubView2 pointInside
+2016-08-31 14:30:45.854 Touch[2910:1084462] point:NSPoint: {77, -32.5}
+2016-08-31 14:30:45.855 Touch[2910:1084462] SubView1 hitTest
+2016-08-31 14:30:45.856 Touch[2910:1084462] point:NSPoint: {77, 171.5}
+2016-08-31 14:30:45.857 Touch[2910:1084462] SubView1 pointInside
+2016-08-31 14:30:45.857 Touch[2910:1084462] point:NSPoint: {77, 171.5}
+2016-08-31 14:30:45.857 Touch[2910:1084462] I did it========TopView
+```
+
+很明显，最终是蓝色的TopView处理了这个事件,现在让SubView来处理，即我想要SubView2来处理SubView2范围以外的点击事件（应用场景：假如这是一个Button，我现在想扩大这个Button的点击范围，就可以这么来做），于是在SubView2中修改pointInside的实现：
+
+```ObjectiveC
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    NSLog(@"SubView2 pointInside");
+    NSLog(@"point:%@", [NSValue valueWithCGPoint:point]);
+    
+    //当点击在SubView2上边50点以内时，当做是点击在SubView2上
+    if (point.y < 0 && point.y > -50) {
+        return YES;
+    }
+    
+    return [super pointInside:point withEvent:event];
+}
+```
+
+这样修改以后，再点击SubView2上方的蓝色部分，发现此时打印出来的是SubView2在处理该事件
+
+```shell
+2016-08-31 14:46:33.947 Touch[2922:1088981] TopView hitTest
+2016-08-31 14:46:33.949 Touch[2922:1088981] point:NSPoint: {93.5, 198.5}
+2016-08-31 14:46:33.949 Touch[2922:1088981] TopView pointInside
+2016-08-31 14:46:33.949 Touch[2922:1088981] point:NSPoint: {93.5, 198.5}
+2016-08-31 14:46:33.950 Touch[2922:1088981] SubView4 hitTest
+2016-08-31 14:46:33.950 Touch[2922:1088981] point:NSPoint: {85.5, -179.5}
+2016-08-31 14:46:33.950 Touch[2922:1088981] SubView4 pointInside
+2016-08-31 14:46:33.950 Touch[2922:1088981] point:NSPoint: {85.5, -179.5}
+2016-08-31 14:46:33.950 Touch[2922:1088981] SubView3 hitTest
+2016-08-31 14:46:33.950 Touch[2922:1088981] point:NSPoint: {-61.5, 101.5}
+2016-08-31 14:46:33.951 Touch[2922:1088981] SubView3 pointInside
+2016-08-31 14:46:33.951 Touch[2922:1088981] point:NSPoint: {-61.5, 101.5}
+2016-08-31 14:46:33.951 Touch[2922:1088981] SubView2 hitTest
+2016-08-31 14:46:33.951 Touch[2922:1088981] point:NSPoint: {85.5, -22.5}
+2016-08-31 14:46:33.951 Touch[2922:1088981] SubView2 pointInside
+2016-08-31 14:46:33.952 Touch[2922:1088981] point:NSPoint: {85.5, -22.5}
+2016-08-31 14:46:33.952 Touch[2922:1088981] SubView2Sub1 hitTest
+2016-08-31 14:46:33.952 Touch[2922:1088981] point:NSPoint: {77.5, -36.5}
+2016-08-31 14:46:33.952 Touch[2922:1088981] SubView2Sub1 pointInside
+2016-08-31 14:46:33.952 Touch[2922:1088981] point:NSPoint: {77.5, -36.5}
+2016-08-31 14:46:33.952 Touch[2922:1088981] I did it========SubView2
+2016-08-31 14:46:33.953 Touch[2922:1088981] TopView hitTest
+2016-08-31 14:46:33.953 Touch[2922:1088981] point:NSPoint: {93.5, 198.5}
+2016-08-31 14:46:33.954 Touch[2922:1088981] TopView pointInside
+2016-08-31 14:46:33.954 Touch[2922:1088981] point:NSPoint: {93.5, 198.5}
+2016-08-31 14:46:33.955 Touch[2922:1088981] SubView4 hitTest
+2016-08-31 14:46:33.956 Touch[2922:1088981] point:NSPoint: {85.5, -179.5}
+2016-08-31 14:46:33.956 Touch[2922:1088981] SubView4 pointInside
+2016-08-31 14:46:33.956 Touch[2922:1088981] point:NSPoint: {85.5, -179.5}
+2016-08-31 14:46:33.957 Touch[2922:1088981] SubView3 hitTest
+2016-08-31 14:46:33.957 Touch[2922:1088981] point:NSPoint: {-61.5, 101.5}
+2016-08-31 14:46:33.957 Touch[2922:1088981] SubView3 pointInside
+2016-08-31 14:46:33.958 Touch[2922:1088981] point:NSPoint: {-61.5, 101.5}
+2016-08-31 14:46:33.958 Touch[2922:1088981] SubView2 hitTest
+2016-08-31 14:46:33.958 Touch[2922:1088981] point:NSPoint: {85.5, -22.5}
+2016-08-31 14:46:33.959 Touch[2922:1088981] SubView2 pointInside
+2016-08-31 14:46:33.959 Touch[2922:1088981] point:NSPoint: {85.5, -22.5}
+2016-08-31 14:46:33.959 Touch[2922:1088981] SubView2Sub1 hitTest
+2016-08-31 14:46:33.960 Touch[2922:1088981] point:NSPoint: {77.5, -36.5}
+2016-08-31 14:46:33.961 Touch[2922:1088981] SubView2Sub1 pointInside
+2016-08-31 14:46:33.962 Touch[2922:1088981] point:NSPoint: {77.5, -36.5}
+2016-08-31 14:46:33.963 Touch[2922:1088981] I did it========SubView2
+```
+
+## 总结
+
+View中事件的传递主要靠hitTest和pointInside配合来一层层往下确定最终该谁来响应。
+
+## BTW
+
+从打印值日志中看，每次响应链都走了两次，意义何在？
