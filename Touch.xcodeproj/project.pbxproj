@@ -13,6 +13,14 @@
 		FF2818D61D766DA0008BB2C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2818D41D766DA0008BB2C7 /* Main.storyboard */; };
 		FF2818D81D766DA0008BB2C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2818D71D766DA0008BB2C7 /* Assets.xcassets */; };
 		FF2818DB1D766DA0008BB2C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2818D91D766DA0008BB2C7 /* LaunchScreen.storyboard */; };
+		FF2818E71D766ED0008BB2C7 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818E61D766ED0008BB2C7 /* TopView.m */; };
+		FF2818EA1D766FFB008BB2C7 /* SubView1.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818E91D766FFB008BB2C7 /* SubView1.m */; };
+		FF2818ED1D76770E008BB2C7 /* SubView2.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818EC1D76770E008BB2C7 /* SubView2.m */; };
+		FF2818F01D7677CC008BB2C7 /* SubView1Sub1.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818EF1D7677CC008BB2C7 /* SubView1Sub1.m */; };
+		FF2818F31D76787A008BB2C7 /* SubView2Sub1.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818F21D76787A008BB2C7 /* SubView2Sub1.m */; };
+		FF2818F61D767953008BB2C7 /* SubView3.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818F51D767953008BB2C7 /* SubView3.m */; };
+		FF2818F91D767A04008BB2C7 /* SubView4.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818F81D767A04008BB2C7 /* SubView4.m */; };
+		FF2818FC1D767C69008BB2C7 /* SubView1Sub1Sub1.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2818FB1D767C69008BB2C7 /* SubView1Sub1Sub1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,23 @@
 		FF2818D71D766DA0008BB2C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF2818DA1D766DA0008BB2C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF2818DC1D766DA0008BB2C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF2818E31D766E76008BB2C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FF2818E51D766ED0008BB2C7 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
+		FF2818E61D766ED0008BB2C7 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
+		FF2818E81D766FFA008BB2C7 /* SubView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView1.h; sourceTree = "<group>"; };
+		FF2818E91D766FFB008BB2C7 /* SubView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView1.m; sourceTree = "<group>"; };
+		FF2818EB1D76770E008BB2C7 /* SubView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView2.h; sourceTree = "<group>"; };
+		FF2818EC1D76770E008BB2C7 /* SubView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView2.m; sourceTree = "<group>"; };
+		FF2818EE1D7677CC008BB2C7 /* SubView1Sub1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView1Sub1.h; sourceTree = "<group>"; };
+		FF2818EF1D7677CC008BB2C7 /* SubView1Sub1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView1Sub1.m; sourceTree = "<group>"; };
+		FF2818F11D76787A008BB2C7 /* SubView2Sub1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView2Sub1.h; sourceTree = "<group>"; };
+		FF2818F21D76787A008BB2C7 /* SubView2Sub1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView2Sub1.m; sourceTree = "<group>"; };
+		FF2818F41D767953008BB2C7 /* SubView3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView3.h; sourceTree = "<group>"; };
+		FF2818F51D767953008BB2C7 /* SubView3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView3.m; sourceTree = "<group>"; };
+		FF2818F71D767A04008BB2C7 /* SubView4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView4.h; sourceTree = "<group>"; };
+		FF2818F81D767A04008BB2C7 /* SubView4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView4.m; sourceTree = "<group>"; };
+		FF2818FA1D767C69008BB2C7 /* SubView1Sub1Sub1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView1Sub1Sub1.h; sourceTree = "<group>"; };
+		FF2818FB1D767C69008BB2C7 /* SubView1Sub1Sub1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView1Sub1Sub1.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +83,22 @@
 		FF2818CA1D766DA0008BB2C7 /* Touch */ = {
 			isa = PBXGroup;
 			children = (
+				FF2818E51D766ED0008BB2C7 /* TopView.h */,
+				FF2818E61D766ED0008BB2C7 /* TopView.m */,
+				FF2818E81D766FFA008BB2C7 /* SubView1.h */,
+				FF2818E91D766FFB008BB2C7 /* SubView1.m */,
+				FF2818EB1D76770E008BB2C7 /* SubView2.h */,
+				FF2818EC1D76770E008BB2C7 /* SubView2.m */,
+				FF2818EE1D7677CC008BB2C7 /* SubView1Sub1.h */,
+				FF2818EF1D7677CC008BB2C7 /* SubView1Sub1.m */,
+				FF2818F11D76787A008BB2C7 /* SubView2Sub1.h */,
+				FF2818F21D76787A008BB2C7 /* SubView2Sub1.m */,
+				FF2818F41D767953008BB2C7 /* SubView3.h */,
+				FF2818F51D767953008BB2C7 /* SubView3.m */,
+				FF2818F71D767A04008BB2C7 /* SubView4.h */,
+				FF2818F81D767A04008BB2C7 /* SubView4.m */,
+				FF2818FA1D767C69008BB2C7 /* SubView1Sub1Sub1.h */,
+				FF2818FB1D767C69008BB2C7 /* SubView1Sub1Sub1.m */,
 				FF2818CE1D766DA0008BB2C7 /* AppDelegate.h */,
 				FF2818CF1D766DA0008BB2C7 /* AppDelegate.m */,
 				FF2818D11D766DA0008BB2C7 /* ViewController.h */,
@@ -67,6 +108,7 @@
 				FF2818D91D766DA0008BB2C7 /* LaunchScreen.storyboard */,
 				FF2818DC1D766DA0008BB2C7 /* Info.plist */,
 				FF2818CB1D766DA0008BB2C7 /* Supporting Files */,
+				FF2818E21D766E47008BB2C7 /* Frameworks */,
 			);
 			path = Touch;
 			sourceTree = "<group>";
@@ -77,6 +119,15 @@
 				FF2818CC1D766DA0008BB2C7 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FF2818E21D766E47008BB2C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF2818E31D766E76008BB2C7 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +201,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF2818D31D766DA0008BB2C7 /* ViewController.m in Sources */,
+				FF2818FC1D767C69008BB2C7 /* SubView1Sub1Sub1.m in Sources */,
+				FF2818EA1D766FFB008BB2C7 /* SubView1.m in Sources */,
+				FF2818ED1D76770E008BB2C7 /* SubView2.m in Sources */,
+				FF2818F31D76787A008BB2C7 /* SubView2Sub1.m in Sources */,
+				FF2818F01D7677CC008BB2C7 /* SubView1Sub1.m in Sources */,
 				FF2818D01D766DA0008BB2C7 /* AppDelegate.m in Sources */,
+				FF2818F91D767A04008BB2C7 /* SubView4.m in Sources */,
+				FF2818E71D766ED0008BB2C7 /* TopView.m in Sources */,
+				FF2818F61D767953008BB2C7 /* SubView3.m in Sources */,
 				FF2818CD1D766DA0008BB2C7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
