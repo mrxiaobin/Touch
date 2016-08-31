@@ -127,3 +127,30 @@ iOS Event Handling学习笔记，从实例中学习,
 - TopView->SubView4->SubView3->SubView2->SubView1->SubView1Sub1->SubView1Sub1Sub1
 
 由此基本可以得出结论，从TopView开始，先调用hitTest方法，hitTest方法中会再调用pointInside方法，该方法判断点击是否在该View中，如果是，则会遍历子视图，重复这些操作，最终返回的是一个响应该事件的View，否则返回nil。
+
+## hitTest
+
+刚是在自定义View中，hitTest方法仅仅只打印了log并调用了super的处理方法，现在，按照刚给说的思路，不调用super的方法，自行按照系统的处理方式来处理进行验证
+
+```ObjectiveC
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    NSLog(@"TopView hitTest");
+    NSLog(@"point:%@", [NSValue valueWithCGPoint:point]);
+    
+    if ([self pointInside:point withEvent:event]) {
+        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
+            CGPoint convertPoint = [subview convertPoint:point fromView:self];
+            UIView *hitTestView = [subview hitTest:convertPoint withEvent:event];
+            if (hitTestView) {
+                return hitTestView;
+            }
+        }
+        
+        return self;
+    }
+
+    return nil;
+}
+```
+
+将TopView中的hitTest方法改写成上边这样以后，再次点击各个View，打印出来的日志和原来一样，验证了前边所说的事件传递过程。

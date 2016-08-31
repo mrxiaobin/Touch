@@ -13,8 +13,20 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     NSLog(@"TopView hitTest");
     NSLog(@"point:%@", [NSValue valueWithCGPoint:point]);
+    
+    if ([self pointInside:point withEvent:event]) {
+        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
+            CGPoint convertPoint = [subview convertPoint:point fromView:self];
+            UIView *hitTestView = [subview hitTest:convertPoint withEvent:event];
+            if (hitTestView) {
+                return hitTestView;
+            }
+        }
+        
+        return self;
+    }
 
-    return [super hitTest:point withEvent:event];
+    return nil;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
